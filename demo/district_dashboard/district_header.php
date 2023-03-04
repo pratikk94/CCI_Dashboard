@@ -25,7 +25,7 @@
 <div class="container-scroller">
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
-            <a class="navbar-brand brand-logo me-5" href="admin_dashboard.php"><img src="../logo_dcpcr.jpg" class="me-2"
+            <a class="navbar-brand brand-logo me-5" href="district_dashboard.php"><img src="../logo_dcpcr.jpg" class="me-2"
                                                                                     alt="FLN Dashboard"/> DCPCR FLN</a>
 
         </div>

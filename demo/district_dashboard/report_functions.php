@@ -7,8 +7,8 @@ session_start();
 /**
  * 
  * 
- * 1. Provide cumulative as well as district wise.
- * 2. If in advanced, don't show as no progress.        //done
+ * 1. Provide cumulative as well as district wise.      // done
+ * 2. If in advanced, don't show as no progress.        // done
  * 3.
  * 
 */
@@ -19,7 +19,7 @@ session_start();
 
 //getBaseline(270,"CWC I (West)");
 //getData(30,"math","CWC I (West)");
-getBaselineCumulative(30);
+//getBaselineCumulative(30);
 
 
 
@@ -44,15 +44,15 @@ function getData($duration,$subject,$district_name){
     $response = [];
     
     for($i=-7;$i<7;$i++){
-        $level[$i] =masterQuery($duration,$subject,$i,$district_name,false);
-        $response["Level ".$i] = $level[$i];
+        
+        $response["Level ".$i] = masterQuery($duration,$subject,$i,$district_name,false);
         
     }
 
     $response["maxLevelHindi"]= masterQuery($duration,'hindi',$i,$district_name,true);
     $response["maxLevelMath"]= masterQuery($duration,'math',$i,$district_name,true);
 
-    echo json_encode($response);
+    return $response;
 }
 
 function getBaselineCumulative($duration){
@@ -96,7 +96,7 @@ function getBaselineCumulative($duration){
     $response["current_hindi"] = $response_current_hindi;
     $response["current_maths"] = $response_current_math;
     
-    echo json_encode($response);
+    return $response;
 }
 
 
@@ -142,8 +142,8 @@ function getBaselineByDistrict($duration,$district_name){
     $response["current_hindi"] = $response_current_hindi;
     $response["current_maths"] = $response_current_math;
     
-    echo json_encode($response);
-    
+    //echo json_encode($response);
+    return $response;
 }
 
 function mapLevel($level){

@@ -3,16 +3,14 @@ include('../includes/connect.php');
 include('../includes/secure.php');
 error_reporting(0);
 session_start();
-
 /**
  *  Things to do.
  * 
  *      1.  Check if cwid exists. If it does, ignore entries. 
  *          Else add to DB
  * 
- * 
  */
-
+ 
 
 
 $level_hindi = ["Beginner","Letter","Words","Paragraphs","Story","Advanced"];

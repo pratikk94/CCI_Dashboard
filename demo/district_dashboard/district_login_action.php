@@ -1,14 +1,14 @@
 <?php
 include('../includes/connect.php');
-//var_dump($_POST['uname']);
+var_dump($_POST['uname']);
 //die();
 error_reporting(0);
-    if (isset($_SESSION['uname'])) {
+if (isset($_SESSION['uname'])) {
         echo "<script>location.href='district_index.php'</script>";
-    } else {
+} else {
         session_start();
-        //echo "<script>alert('Session created');</script>";
-        //echo "<script>alert(".$_POST['uname'].");</script>" ;
+        echo "<script>alert('Session created');</script>";
+        echo "<script>alert(".$_POST['uname'].");</script>" ;
 
         if (isset($_POST['uname'])&&isset($_POST['password'])) {
             $uname = mysqli_real_escape_string($conn, $_POST['uname']);
@@ -36,12 +36,14 @@ error_reporting(0);
                 }
             }
             else if ($type == "admin"){
+                echo "<script>alert('In here');</script>";
                 $sql = "SELECT * FROM tbl_admin_user WHERE uname = '$uname' and password = '$password'";
+               
                 $result = mysqli_query($conn, $sql);
                 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                 $aid = $row['aid'];
                 $count = mysqli_num_rows($result);
-
+                
                 if ($count == 1) {
                     //session_register("uname");
                     $_SESSION['uname'] = $uname;
