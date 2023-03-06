@@ -12,16 +12,18 @@ BODY {
     height: auto;
 }
 </style>
-<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
 </head>
 <body>
-    <canvas id="graphCanvas"></canvas>
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+<canvas id="chartJSContainer" width="600" height="400"></canvas>
+<canvas id="myChart" width="400" height="400"></canvas>
     
 
     <script>
+        var speedCanvas = document.getElementById("graphCanvas");
+                   
         $(document).ready(function () {
             showGraph();
         });
@@ -50,32 +52,93 @@ BODY {
                     console.log(baseLineValue);
                     console.log(currentValue);
 
-                    var speedCanvas = document.getElementById("graphCanvas");
-                    
-                    var speedData = {
-                        labels: name,
-                        datasets: [baseLineValue, currentValue]
-                    };
+                    const xValues1 = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
+                    const yValues1 = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15];
 
-                    var chartOptions = {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                            labels: {
-                            boxWidth: 80,
-                            fontColor: 'black'
+                    const xValues2 = [54, 64, 74, 84, 94, 104, 114, 124, 134, 144, 154];
+                    const yValues2 = [8, 9, 9, 10, 10, 10, 11, 12, 15, 15, 16];
+                    const options = {
+                        type: 'line',
+                        data: {
+                            datasets: [
+                                {
+                                    label: 'Initial level of students',
+                                    data: baseLineValue,
+                                    borderColor: 'pink'
+                                },
+                                {
+                                    label: 'Current level of students',
+                                    data: currentValue,
+                                    borderColor: 'orange',
+                                    xAxisID: 'x2' // Match dataset to other axis
+                                }
+                            ]
+                        },
+                        options: {
+                            scales: {
+                            xAxes: [{
+                                    type: 'category',
+                                    labels: labelsHindi,
+                                    id: 'x',
+                                    display: true // Set to false to hide the axis
+                                },
+                                {
+                                    type: 'category',
+                                    labels: labelsHindi,
+                                    id: 'x2',
+                                    display: false // Set to false to hide the axis
+                                }
+                            ]
                             }
                         }
-                    };
+                        }
 
-                    var lineChart = new Chart(speedCanvas, {
-                        type: 'line',
-                        data: speedData,
-                        options: chartOptions
-                    });
+                        const ctx = document.getElementById('chartJSContainer').getContext('2d');
+                        new Chart(ctx, options);
+
+
+                        var ctx2 = document.getElementById("myChart").getContext("2d");
+
+                        var data = {
+                        labels: labelsHindi,
+                        datasets: [{
+                            label: "Baseline",
+                            backgroundColor: "red",
+                            data: baseLineValue
+                        },
+                        {
+                            label: "Current",
+                            backgroundColor: "blue",
+                            data: currentValue
+                        }
+                    ]
+                        };
+                        var myBarChart = new Chart(ctx2, {
+                        type: 'bar',
+                        data: data,
+                        options: {
+                            barValueSpacing: 20,
+                            scales: {
+                            yAxes: [{
+                                ticks: {
+                                min: 0,
+                                }
+                            }]
+                            }
+                        }
+                        });
+
+
+
 
 
                 });
+
+
+
+
+
+
             }
         }
         </script>
